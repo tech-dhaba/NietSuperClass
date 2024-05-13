@@ -1,3 +1,5 @@
+//program to find the number of ways to place n queens on a n*n chess board such that no two queens attack each other
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
@@ -68,7 +70,7 @@ int loop(int n){
 
 int main(void){
     memset(queens,-1,20);
-    int n;scanf("%d",&n);
-    printf("%d ",rec(0,n));
-    printf("%d",loop(n));
+    // int n;scanf("%d",&n);
+    // printf("%d ",rec(0,13));
+    printf("%d",loop(13));
 }

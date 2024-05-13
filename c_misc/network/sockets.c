@@ -1,3 +1,5 @@
+//program to ping an address using sockets
+
 #include<stdio.h>
 #include <netinet/in.h>
 #include <sys/socket.h>
