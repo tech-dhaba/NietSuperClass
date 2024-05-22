@@ -1,0 +1,15 @@
+.LFB23:
+        .cfi_startproc
+        endbr64
+        subq    $8, %rsp
+        .cfi_def_cfa_offset 16
+        movl    $7, %edx
+        movl    $1, %edi
+        xorl    %eax, %eax
+        leaq    .LC0(%rip), %rsi
+        call    __printf_chk@PLT
+        xorl    %eax, %eax
+        addq    $8, %rsp
+        .cfi_def_cfa_offset 8
+        ret
+        .cfi_endproc

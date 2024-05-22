@@ -130,13 +130,15 @@ void update_node(node** start,int key,int new_data){
 
 void reverse(node** start){
     node* temp=NULL;
+    node* prev=NULL;
     node* current=*start;
     while(current!=NULL){
         temp=current->next;
-        current->next=temp;
+        current->next=prev;
+        prev=current;
         current=temp;
     }
-    *start=temp;
+    *start=prev;
 }
 
 int main(void){
