@@ -16,7 +16,7 @@ void dfs(Graph* graph, int startVertex) {
         int currentVertex = pop(&stack);
         printf("Visited %d\n", currentVertex);
 
-        Node* temp = graph->adjLists[currentVertex];
+        Node* temp = graph->a jLists[currentVertex];
         while (temp) {
             int adjVertex = temp->vertex;
             if (visited[adjVertex] == 0) {

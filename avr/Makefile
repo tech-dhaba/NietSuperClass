@@ -1,4 +1,4 @@
-zz ?= blink
+zz ?=blink 
 
 board_path:=/dev/ttyACM0
 

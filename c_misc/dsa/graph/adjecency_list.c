@@ -52,6 +52,13 @@ void addEdge(Graph* graph, int src, int dest) {
     graph->adjLists[dest] = newNode;
 }
 
+void addEdgeDir(Graph* graph, int src, int dest){
+  //add an edge from source to dest
+  Node* newNode = createNode(dest);
+  newNode->next = graph->adjLists[src];
+  graph->adjLists[src] = newNode;
+}
+
 // Print the graph
 void printGraph(Graph* graph) {
     for (int i = 0; i < graph->numVertices; i++) {

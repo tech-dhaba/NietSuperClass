@@ -8,9 +8,10 @@
 #include <unistd.h>
 
 // #define IP "142.250.206.142" //google.com
-#define IP "74.6.143.25" //yahoo.com
+//#define IP "172.25.231.135"//yahoo.com
+#define IP "192.168.1.39"
 // #define IP "127.0.0.1"
-#define PORT 80
+#define PORT 8080
 // #define PORT 4221
 
 int main(){
@@ -50,4 +51,4 @@ int main(){
     close(socketfiledescriptor);
 
     return 0;
-}
+} 
