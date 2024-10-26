@@ -1,20 +1,38 @@
-zz ?=blink 
+# Makefile for AVR project
 
-board_path:=/dev/ttyACM0
+# Project settings
+PROJECT_NAME = main
+SOURCE ?= blink.c  # Replace with your source file(s)
+MCU = atmega328p  # Replace with your microcontroller type
+F_CPU = 16000000UL  # Clock speed, replace if different
+PROGRAMMER = arduino  # Programmer type, replace if different
+PORT = /dev/ttyACM0  # Replace with your Arduino's port
+BAUD = 115200  # Baud rate for uploading
 
-ifeq ($(board),red)
-		board_path:=/dev/serial/by-path/platform-vhci_hcd.0-usb-0:1:1.0-port0
-endif
+# Compiler settings
+CC = avr-gcc
+OBJCOPY = avr-objcopy
+CFLAGS = -Wall -Os -DF_CPU=$(F_CPU) -mmcu=$(MCU)
+LDFLAGS = -mmcu=$(MCU)
 
+# Targets
+all: $(PROJECT_NAME).hex
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
-default:
-		avr-gcc -Os -DF_CPU=16000000UL -mmcu=atmega328p -c -o avr.o $(zz).c
-		avr-gcc -o avr.bin avr.o
-		avr-objcopy -O ihex -R .eeprom avr.bin avr.hex
-		sudo avrdude -F -V -c arduino -p ATMEGA328P -P $(board_path) -b 115200 -U flash:w:avr.hex
+$(PROJECT_NAME).elf: $(SOURCE:.c=.o)
+	$(CC) $(LDFLAGS) $^ -o $@
 
-.PHONY: clean
+$(PROJECT_NAME).hex: $(PROJECT_NAME).elf
+	$(OBJCOPY) -O ihex -R .eeprom $< $@
 
+upload: $(PROJECT_NAME).hex
+	avrdude -c $(PROGRAMMER) -p $(MCU) -P $(PORT) -b $(BAUD) -D -U flash:w:$(PROJECT_NAME).hex:i
+
+# Clean up
 clean:
-		rm -f avr.o avr.bin avr.hex
+	rm -f *.o $(PROJECT_NAME).elf $(PROJECT_NAME).hex
+
+.PHONY: all clean upload
+

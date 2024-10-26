@@ -141,6 +141,18 @@ void reverse(node** start){
     *start=prev;
 }
 
+void reverserec(node** start,node* temp,node* prev, node* current){
+    if(current==NULL){
+      *start=prev;
+      return;
+    }
+    temp=current->next;
+    current->next=prev;
+    prev=current;
+    current=temp;
+    reverserec(start,temp,prev,current);
+}
+
 int main(void){
     node*start=insert_at_beginning(NULL,5);
     insert_at_end(start,6);
@@ -149,6 +161,7 @@ int main(void){
     node** startp=&start;
     insert_at_position(startp,7,0);
     update_node(startp,7,10);
+    reverserec(&start,NULL,NULL,start);
     // p(start->data);
     printll(start);
     freell(start);

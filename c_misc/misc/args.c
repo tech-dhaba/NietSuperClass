@@ -12,11 +12,10 @@ static char *shift(int* argc, char*** argv){
 }
 
 int main(int argc,char* argv[]){
+  printf("%d",argc);  
   while(argc){	
     printf("%s ",shift(&argc,&argv));
   }
   printf("\n");
   return 0;
 }
-
-
